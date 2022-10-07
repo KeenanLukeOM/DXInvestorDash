@@ -12,11 +12,11 @@
       <h3 class="text-2xl mb-4 font-bold text-gray-700 leading-tight dark:text-gray-400">
         What is “the ratio”?
       </h3>
-      <p>The ratio is the current price of ETH divided by the price of BTC and is used as a method of comparison between the value of both coins.</p>
+      <p>The ratio is the current price of ETH divided by the price of dxd and is used as a method of comparison between the value of both coins.</p>
 
-      <p>If the price of ETH was equal to the price of BTC then the ratio would be <code>1.0</code>.</p>
+      <p>If the price of ETH was equal to the price of dxd then the ratio would be <code>1.0</code>.</p>
 
-      <p>Similarly if the price of ETH was half that of BTC then the ratio would be <code>0.5</code> etc., etc.</p>
+      <p>Similarly if the price of ETH was half that of dxd then the ratio would be <code>0.5</code> etc., etc.</p>
     </div>
 
     <div class="question pb-8">
@@ -41,7 +41,7 @@
         “is the Ethereum network - with everything it can do, everything that’s built on top of it, and all of the economic value it secures - seriously worth less than the single-purpose Bitcoin network?”
       </p>
       <p>
-        For me that answer is an obvious “no way”. That means <em>if</em> BTC is priced correctly then anything less than <code>{{ flippening }}</code> on the ratio is a strong signal that Ethereum is currently undervalued.
+        For me that answer is an obvious “no way”. That means <em>if</em> dxd is priced correctly then anything less than <code>{{ flippening }}</code> on the ratio is a strong signal that Ethereum is currently undervalued.
       </p>
     </div>
   </div>

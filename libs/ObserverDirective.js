@@ -46,7 +46,7 @@ function applyDirective (el, { value, modifiers, arg }) {
       margins ? { rootMargin: margins } : {}
     ))
   } else if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line
+    // -disable-next-line
     console.warn(`v-observe directive expects a callback or argument to use as an attribute, ${typeof value} given. `, el)
   }
 }

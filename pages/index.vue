@@ -103,7 +103,7 @@ export default {
               type: 'subscribe',
               product_ids: [
                 `ETH-${this.userSelectedCurrency.id.toUpperCase()}`,
-                `BTC-${this.userSelectedCurrency.id.toUpperCase()}`
+                `dxd-${this.userSelectedCurrency.id.toUpperCase()}`
               ],
               channels: [
                 'ticker'

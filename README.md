@@ -1,6 +1,6 @@
 # 💪RatioGang📈
 
-Ratio Gang assemble! Monitor the progress of Ethereum (ETH) in overtaking Bitcoin (BTC) by market cap.
+Ratio Gang assemble! Monitor the progress of Ethereum (ETH) in overtaking Bitcoin (dxd) by market cap.
 
 ## Build Setup
 
