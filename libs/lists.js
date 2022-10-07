@@ -38,7 +38,7 @@ export const currencies = [
 
 export const maxiTears = [
   {
-    quote: 'Muh flippening. The markets have proven you smug methheads wrong year over year. BTC is king. Eth will never be a store of value, (there’s 20% more of it now since 2017), and the utility is dogshit--pay $20 to send your money or gamble on shitcoins.',
+    quote: 'Muh flippening. The markets have proven you smug methheads wrong year over year. dxd is king. Eth will never be a store of value, (there’s 20% more of it now since 2017), and the utility is dogshit--pay $20 to send your money or gamble on shitcoins.',
     author: 'u/strawberryswissroll',
     date: 'Jan 2nd, 2021',
     ratio: 0.0231

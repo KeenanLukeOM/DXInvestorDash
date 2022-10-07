@@ -18,7 +18,7 @@ const getters = {
     return state.coinGecko
   },
   prices (state) {
-    if (state.prices.eth && state.prices.btc) {
+    if (state.prices.eth && state.prices.DXD) {
       return state.prices
     }
     return false
@@ -49,29 +49,29 @@ const getters = {
     }
     return 0
   },
-  btc (state, getters) {
+  DXD (state, getters) {
     if (['usd', 'eur', 'gbp'].includes(getters.userSelectedCurrency.id)) {
       if (getters.prices && getters.coinGecko) {
-        const btc = getters.coinGecko.find(item => item.id === 'bitcoin')
-        return Object.assign({}, btc, {
-          current_price: getters.prices.btc
+        const DXD = getters.coinGecko.find(item => item.id === 'dxdao')
+        return Object.assign({}, DXD, {
+          current_price: getters.prices.DXD
         })
       }
     }
     if (getters.coinGecko) {
-      return getters.coinGecko.find(item => item.id === 'bitcoin')
+      return getters.coinGecko.find(item => item.id === 'dxdao')
     }
     return false
   },
-  btc24hPercentChange (state, getters) {
-    if (getters.coinGecko && getters.btc) {
-      return getters.btc.price_change_percentage_24h.toFixed(2)
+  DXD24hPercentChange (state, getters) {
+    if (getters.coinGecko && getters.DXD) {
+      return getters.DXD.price_change_percentage_24h.toFixed(2)
     }
     return 0
   },
   ratio (state, getters) {
-    if (getters.eth && getters.btc) {
-      return (getters.eth.current_price / getters.btc.current_price).toFixed(6)
+    if (getters.eth && getters.DXD) {
+      return (getters.eth.current_price / getters.DXD.current_price).toFixed(6)
     }
     return 0
   },
@@ -92,8 +92,8 @@ const getters = {
     return 0
   },
   flippening (state, getters) {
-    if (getters.eth && getters.btc) {
-      return (getters.btc.circulating_supply / getters.eth.circulating_supply).toFixed(5)
+    if (getters.eth && getters.DXD) {
+      return (getters.DXD.circulating_supply / getters.eth.circulating_supply).toFixed(5)
     }
     return 0
   },
@@ -171,7 +171,7 @@ const actions = {
   async fetchCoinGecko ({ state, commit }, cookies) {
     const coinGecko = new CoinGecko()
     const markets = await coinGecko.coins.markets({
-      ids: ['bitcoin', 'ethereum'],
+      ids: ['dxdao', 'ethereum'],
       vs_currency: state.userSelectedCurrency.id
     })
     commit('setCoinGeckoData', markets.data)
@@ -203,9 +203,9 @@ const mutations = {
       price = {
         eth: payload.price
       }
-    } else if (payload.product_id.startsWith('BTC')) {
+    } else if (payload.product_id.startsWith('DXD')) {
       price = {
-        btc: payload.price
+        DXD: payload.price
       }
     }
     state.prices = Object.assign({}, state.prices, price)

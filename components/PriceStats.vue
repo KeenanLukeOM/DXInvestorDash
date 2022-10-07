@@ -18,7 +18,7 @@
       </span>
     </span>
     <span class="text-right mr-2 sm:mr-4 md:mr-8">
-      <strong class="text-gray-700 dark:text-gray-400">DXD:</strong> <span class="monospace">{{ formatPrice(btc.current_price, userSelectedCurrency.format, userSelectedCurrency.id) }}</span><br>
+      <strong class="text-gray-700 dark:text-gray-400">DXD:</strong> <span class="monospace">{{ formatPrice(dxd.current_price, userSelectedCurrency.format, userSelectedCurrency.id) }}</span><br>
       <span class="change-percent" :data-increased="isPossitive(btc24hPercentChange)">
         {{ btc24hPercentChange }}% <span class="text-gray-600 dark:text-gray-500">24h price</span>
       </span>
@@ -48,10 +48,10 @@ export default {
     ...mapGetters({
       userSelectedCurrency: 'markets/userSelectedCurrency',
       eth: 'markets/eth',
-      btc: 'markets/btc',
+      dxd: 'markets/dxd',
       ratio: 'markets/ratio',
       eth24hPercentChange: 'markets/eth24hPercentChange',
-      btc24hPercentChange: 'markets/btc24hPercentChange',
+      dxd24hPercentChange: 'markets/dxd24hPercentChange',
       wsPriceFeed: 'system/webSocketPriceFeed',
       fallbackPriceFeed: 'system/fallbackPriceFeed'
     }),
@@ -59,10 +59,10 @@ export default {
       return this.wsPriceFeed || this.fallbackPriceFeed
     },
     ratioChange24h () {
-      if (this.eth && this.btc && this.ratio) {
+      if (this.eth && this.dxd && this.ratio) {
         const oldEthPrice = parseFloat(this.eth.current_price) + parseFloat(this.eth.price_change_24h)
-        const oldBtcPrice = parseFloat(this.btc.current_price) + parseFloat(this.btc.price_change_24h)
-        const oldRatio = parseFloat((oldEthPrice / oldBtcPrice).toFixed(6))
+        const oldDXdPrice = parseFloat(this.dxd.current_price) + parseFloat(this.dxd.price_change_24h)
+        const oldRatio = parseFloat((oldEthPrice / oldDxdPrice).toFixed(6))
         const ratioChange = (((oldRatio - parseFloat(this.ratio)) / oldRatio) * 100).toFixed(2)
         return ratioChange
       }
