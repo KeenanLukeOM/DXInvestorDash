@@ -18,7 +18,7 @@
       </span>
     </span>
     <span class="text-right mr-2 sm:mr-4 md:mr-8">
-      <strong class="text-gray-700 dark:text-gray-400">BTC:</strong> <span class="monospace">{{ formatPrice(btc.current_price, userSelectedCurrency.format, userSelectedCurrency.id) }}</span><br>
+      <strong class="text-gray-700 dark:text-gray-400">DXD:</strong> <span class="monospace">{{ formatPrice(btc.current_price, userSelectedCurrency.format, userSelectedCurrency.id) }}</span><br>
       <span class="change-percent" :data-increased="isPossitive(btc24hPercentChange)">
         {{ btc24hPercentChange }}% <span class="text-gray-600 dark:text-gray-500">24h price</span>
       </span>
