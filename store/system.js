@@ -32,7 +32,7 @@ const getters = {
  */
 const actions = {
   hideDonationBanner ({ commit }, cookies) {
-    cookies.set('ratiogang-hide-banner', true, {
+    cookies.set('dxinvestordash-hide-banner', true, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365
     })

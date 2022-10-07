@@ -68,7 +68,7 @@ export default {
   },
   async mounted () {
     if (this.$cookies) {
-      const hideBanner = await this.$cookies.get('ratiogang-hide-banner')
+      const hideBanner = await this.$cookies.get('dxinvestordash-hide-banner')
       if (hideBanner) {
         this.$store.dispatch('system/hideDonationBanner', this.$cookies)
       }

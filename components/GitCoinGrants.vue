@@ -2,19 +2,19 @@
   <div class="gitcoin-grants-alert text-gray-600 dark:text-gray-500">
     <div class="message">
       <span class="headline text-center font-black text-gray-800 dark:text-gray-300">
-        <span class="font-normal">💪</span>RatioGang<span class="font-normal">📈</span> is a participating project in the current GR12 round of Gitcoin Grants.<br>
+        <span class="font-normal">🔵</span>DXInvestorDash<span class="font-normal">🔵</span> is a participating project in the current GR12 round of Gitcoin Grants.<br>
         <small>Dec 1st - Dec 16th</small>
       </span>
       <span class="copy">
         A <strong class="text-blue-500 dark:text-blue-300">$1</strong> donation will result in approximately a <strong class="text-blue-500 dark:text-blue-300">$100</strong> match from the
         quadratic funding pool. If you have enjoyed this project your consideration is greatly appreciated.
-        RatioGang has been and shall remain a free, ad-free, and open-source project.
+        DXInvestorDash has been and shall remain a free, ad-free, and open-source project.
       </span>
     </div>
     <div class="options">
       <div class="flex align-center justify-center mb-4 mt-4">
         <div class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4">
-          <a target="_blank" rel="nofollow noopener" href="https://gitcoin.co/grants/2239/ratiogangcom"><span class="font-normal">💪</span> Donate</a>
+          <a target="_blank" rel="nofollow noopener" href="https://gitcoin.co/grants/2239/ratiogangcom"><span class="font-normal">🔵</span> Donate</a>
         </div>
         <div
           class="cursor-pointer bg-transparent hover:bg-blue-600 text-blue-500 dark:text-gray-200 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"

@@ -162,7 +162,7 @@ const getters = {
  */
 const actions = {
   async restoreUserPreferredCurrency ({ state, commit }, cookies) {
-    const userStoredCurrency = cookies ? await cookies.get('ratiogang-currency') : state.userSelectedCurrency
+    const userStoredCurrency = cookies ? await cookies.get('dxinvestordash-currency') : state.userSelectedCurrency
     const currency = userStoredCurrency || currencies[0]
     if (userStoredCurrency) {
       commit('setUserSelectedCurrency', currency)
@@ -177,7 +177,7 @@ const actions = {
     commit('setCoinGeckoData', markets.data)
   },
   updateUserSelectedCurrency ({ commit, dispatch }, { cookies, data }) {
-    cookies.set('ratiogang-currency', data, {
+    cookies.set('dxinvestordash-currency', data, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365
     })

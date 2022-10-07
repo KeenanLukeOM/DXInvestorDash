@@ -1,4 +1,4 @@
-# 💪RatioGang📈
+# 🔵DXInvestorDash🔵
 
 Ratio Gang assemble! Monitor the progress of Ethereum (ETH) in overtaking Bitcoin (dxd) by market cap.
 

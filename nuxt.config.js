@@ -1,10 +1,10 @@
 const head = {
-  title: '💪 RatioGang 📈 - The ETH / dxd Ratio Tracker',
+  title: '🔵 DXInvestorDash 🔵 - The ETH / dxd Ratio Tracker',
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { hid: 'description', name: 'description', content: 'Ratio Gang assemble! Monitor the progress of Ethereum (ETH) in overtaking Bitcoin (dxd) by market cap.' },
-    { hid: 'twitter:image', name: 'twitter:image', content: 'https://ratiogang.com/og.png' }
+    { hid: 'twitter:image', name: 'twitter:image', content: 'https://dxinvestordash.com/og.png' }
   ]
 }
 
@@ -63,10 +63,10 @@ export default {
   // PWA config
   pwa: {
     meta: {
-      ogSiteName: '💪 RatioGang 📈 - The ETH / dxd Ratio Tracker',
-      ogTitle: '💪 RatioGang 📈 - The ETH / dxd Ratio Tracker',
+      ogSiteName: '🔵 DXInvestorDash 🔵 - The ETH / dxd Ratio Tracker',
+      ogTitle: '🔵 DXInvestorDash 🔵 - The ETH / dxd Ratio Tracker',
       ogDescription: 'Ratio Gang assemble! Monitor the progress of Ethereum (ETH) in overtaking Bitcoin (dxd) by market cap.',
-      ogHost: 'https://ratiogang.com',
+      ogHost: 'https://dxinvestordash.com',
       ogImage: '/og.png',
       twitterCard: 'summary_large_image'
     }
