@@ -3,7 +3,9 @@
     <table class="table-fixed">
       <thead>
         <tr>
-          <td colspan="2" class="text-center leading-md">Ethereum Statistics <small>(Last Update: {{ lastUpdated }})</small></td>
+          <td colspan="2" class="text-center leading-md">DXdao Statistics
+
+<small>(Last Update: {{ lastUpdated }})</small></td>
         </tr>
       </thead>
       <tbody>

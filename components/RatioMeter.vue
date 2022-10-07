@@ -228,7 +228,7 @@ export default {
       userSelectedCurrency: 'markets/userSelectedCurrency',
       coinGecko: 'markets/coinGecko',
       eth: 'markets/eth',
-      btc: 'markets/btc',
+      dxd: 'markets/dxd',
       ratio: 'markets/ratio',
       ratioDollars: 'markets/ratioDollars',
       ratioPercent: 'markets/ratioPercent',
@@ -316,7 +316,7 @@ export default {
     calculatedDollars () {
       if (this.useDragProgress) {
         return this.formatPrice(
-          ((this.dragWidthPercent * this.max) / 100) * this.btc.current_price,
+          ((this.dragWidthPercent * this.max) / 100) * this.dxd.current_price,
           this.userSelectedCurrency.format,
           this.userSelectedCurrency.id
         )

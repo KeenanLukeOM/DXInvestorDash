@@ -6,7 +6,7 @@
     <p
       class="text-gray-600 text-lg dark:text-gray-500"
     >
-      “Muh flippening. The markets have proven you smug methheads wrong year over year. BTC is king. Eth will never be a store of value, (there's 20% more of it now since 2017), and the utility is dogshit--pay $20 to send your money or gamble on shitcoins.”
+      “Muh flippening. The markets have proven you smug methheads wrong year over year. dxd is king. Eth will never be a store of value, (there's 20% more of it now since 2017), and the utility is dogshit--pay $20 to send your money or gamble on shitcoins.”
     </p>
     <p
       class="text-gray-700 pt-4 leading-tight dark:text-gray-400"
