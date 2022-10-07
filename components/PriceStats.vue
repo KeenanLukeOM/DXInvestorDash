@@ -19,8 +19,8 @@
     </span>
     <span class="text-right mr-2 sm:mr-4 md:mr-8">
       <strong class="text-gray-700 dark:text-gray-400">DXD:</strong> <span class="monospace">{{ formatPrice(dxd.current_price, userSelectedCurrency.format, userSelectedCurrency.id) }}</span><br>
-      <span class="change-percent" :data-increased="isPossitive(btc24hPercentChange)">
-        {{ btc24hPercentChange }}% <span class="text-gray-600 dark:text-gray-500">24h price</span>
+      <span class="change-percent" :data-increased="isPossitive(dxd24hPercentChange)">
+        {{ dxd24hPercentChange }}% <span class="text-gray-600 dark:text-gray-500">24h price</span>
       </span>
     </span>
     <span class="text-right">
@@ -61,7 +61,7 @@ export default {
     ratioChange24h () {
       if (this.eth && this.dxd && this.ratio) {
         const oldEthPrice = parseFloat(this.eth.current_price) + parseFloat(this.eth.price_change_24h)
-        const oldDXdPrice = parseFloat(this.dxd.current_price) + parseFloat(this.dxd.price_change_24h)
+        const oldDxdPrice = parseFloat(this.dxd.current_price) + parseFloat(this.dxd.price_change_24h)
         const oldRatio = parseFloat((oldEthPrice / oldDxdPrice).toFixed(6))
         const ratioChange = (((oldRatio - parseFloat(this.ratio)) / oldRatio) * 100).toFixed(2)
         return ratioChange

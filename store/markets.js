@@ -18,7 +18,7 @@ const getters = {
     return state.coinGecko
   },
   prices (state) {
-    if (state.prices.eth && state.prices.DXD) {
+    if (state.prices.eth && state.prices.dxd) {
       return state.prices
     }
     return false
@@ -49,12 +49,12 @@ const getters = {
     }
     return 0
   },
-  DXD (state, getters) {
+  dxd (state, getters) {
     if (['usd', 'eur', 'gbp'].includes(getters.userSelectedCurrency.id)) {
       if (getters.prices && getters.coinGecko) {
-        const DXD = getters.coinGecko.find(item => item.id === 'dxdao')
-        return Object.assign({}, DXD, {
-          current_price: getters.prices.DXD
+        const dxd = getters.coinGecko.find(item => item.id === 'dxdao')
+        return Object.assign({}, dxd, {
+          current_price: getters.prices.dxd
         })
       }
     }
@@ -63,15 +63,15 @@ const getters = {
     }
     return false
   },
-  DXD24hPercentChange (state, getters) {
-    if (getters.coinGecko && getters.DXD) {
-      return getters.DXD.price_change_percentage_24h.toFixed(2)
+  dxd24hPercentChange (state, getters) {
+    if (getters.coinGecko && getters.dxd) {
+      return getters.dxd.price_change_percentage_24h.toFixed(2)
     }
     return 0
   },
   ratio (state, getters) {
-    if (getters.eth && getters.DXD) {
-      return (getters.eth.current_price / getters.DXD.current_price).toFixed(6)
+    if (getters.eth && getters.dxd) {
+      return (getters.eth.current_price / getters.dxd.current_price).toFixed(6)
     }
     return 0
   },
@@ -92,8 +92,8 @@ const getters = {
     return 0
   },
   flippening (state, getters) {
-    if (getters.eth && getters.DXD) {
-      return (getters.DXD.circulating_supply / getters.eth.circulating_supply).toFixed(5)
+    if (getters.eth && getters.dxd) {
+      return (getters.dxd.circulating_supply / getters.eth.circulating_supply).toFixed(5)
     }
     return 0
   },
@@ -203,9 +203,9 @@ const mutations = {
       price = {
         eth: payload.price
       }
-    } else if (payload.product_id.startsWith('DXD')) {
+    } else if (payload.product_id.startsWith('dxd')) {
       price = {
-        DXD: payload.price
+        dxd: payload.price
       }
     }
     state.prices = Object.assign({}, state.prices, price)
