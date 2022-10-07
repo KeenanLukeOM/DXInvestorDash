@@ -3,16 +3,18 @@
     <table class="table-fixed">
       <thead>
         <tr>
-          <td colspan="2" class="text-center leading-md">Ethereum Statistics <small>(Last Update: {{ lastUpdated }})</small></td>
+          <td colspan="2" class="text-center leading-md">DXdao Statistics
+
+<small>(Last Update: {{ lastUpdated }})</small></td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="w-1/2 text-right"><strong>Cost of Ethereum PoS Validator</strong></td>
+          <td class="w-1/2 text-right"><strong>DXdao Treasury Value</strong></td>
           <td class="w-1/2">{{ nodeCost }}</td>
         </tr>
         <tr>
-          <td class="w-1/2 text-right"><strong>Ethereum Circulating Supply</strong></td>
+          <td class="w-1/2 text-right"><strong>DXD Circulating Supply</strong></td>
           <td class="w-1/2">{{ ethCirculatingSupply }}</td>
         </tr>
         <tr>
