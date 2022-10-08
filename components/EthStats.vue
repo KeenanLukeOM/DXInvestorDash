@@ -1,5 +1,5 @@
 <template>
-  <div class="eth-stats max-w-screen-sm m-auto">
+  <div class="dxd-stats max-w-screen-sm m-auto">
     <table class="table-fixed">
       <thead>
         <tr>
@@ -15,7 +15,7 @@
         </tr>
         <tr>
           <td class="w-1/2 text-right"><strong>DXD Circulating Supply</strong></td>
-          <td class="w-1/2">{{ ethCirculatingSupply }}</td>
+          <td class="w-1/2">{{ dxdCirculatingSupply }}</td>
         </tr>
         <tr>
           <td class="w-1/2 text-right"><strong>All Time High (ATH)</strong></td>
@@ -45,18 +45,18 @@ dayjs.extend(relativeTime)
 export default {
   computed: {
     ...mapGetters({
-      eth: 'markets/eth',
+      dxd: 'markets/dxd',
       userSelectedCurrency: 'markets/userSelectedCurrency'
     }),
     nodeCost () {
-      return this.eth ? formatPrice(this.eth.current_price * 32, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
+      return this.dxd ? formatPrice(this.dxd.current_price * 32, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
     },
     allTimeHigh () {
-      return this.eth ? formatPrice(this.eth.ath, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
+      return this.dxd ? formatPrice(this.dxd.ath, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
     },
     daysSinceAllTimeHigh () {
-      if (this.eth) {
-        const athDate = dayjs(this.eth.ath_date)
+      if (this.dxd) {
+        const athDate = dayjs(this.dxd.ath_date)
         return dayjs().diff(athDate, 'day').toLocaleString(
           this.userSelectedCurrency.format,
           { maximumFractionDigits: 0 }
@@ -65,11 +65,11 @@ export default {
       return false
     },
     percentageFromAllTimeHigh () {
-      return this.eth ? `${this.eth.ath_change_percentage.toFixed(2)}%` : false
+      return this.dxd ? `${this.dxd.ath_change_percentage.toFixed(2)}%` : false
     },
-    ethCirculatingSupply () {
-      if (this.eth) {
-        return this.eth.circulating_supply.toLocaleString(
+    dxdCirculatingSupply () {
+      if (this.dxd) {
+        return this.dxd.circulating_supply.toLocaleString(
           this.userSelectedCurrency.format,
           { maximumFractionDigits: 0 }
         )
@@ -77,8 +77,8 @@ export default {
       return false
     },
     lastUpdated () {
-      if (this.eth) {
-        return dayjs(this.eth.last_updated).fromNow()
+      if (this.dxd) {
+        return dayjs(this.dxd.last_updated).fromNow()
       }
       return false
     }
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.eth-stats {
+.dxd-stats {
   width: 100%;
 
   table {
