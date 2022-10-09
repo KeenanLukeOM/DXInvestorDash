@@ -19,7 +19,7 @@
             <!-- {{ formatPrice(((dxdaoEthBalance / 1000000000000000000) * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoUsdcBalance / 1000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            {{ formatPrice(((dxdaoEth2Balance / 1000000000000000000 ) ), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            {{ formatPrice(((dxdaoEth2Balance / 1000000000000000000) * eth2.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }}
           </td>
         </tr>
         <tr>
@@ -80,6 +80,7 @@ export default {
     ...mapGetters({
       dxd: 'markets/dxd',
       eth: 'markets/eth',
+      eth2: 'markets/eth2',
       userSelectedCurrency: 'markets/userSelectedCurrency',
       wsPriceFeed: 'system/webSocketPriceFeed',
       fallbackPriceFeed: 'system/fallbackPriceFeed'
