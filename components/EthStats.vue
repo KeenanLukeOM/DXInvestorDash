@@ -20,7 +20,8 @@
             <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoUsdcBalance / 1000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoEth2Balance / 1000000000000000000) * eth2.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            {{ formatPrice(((dxdaoLusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            {{ formatPrice(((dxdaoSwprBalance / 1000000000000000000) * swpr.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            <!-- {{ formatPrice(((dxdaoLusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
           </td>
         </tr>
         <tr>
@@ -75,6 +76,7 @@ export default {
       dxdaoDaiBal: {},
       dxdaoUsdcBal: {},
       dxdaoEth2Bal: {},
+      dxdaoSwprBal: {},
       dxdaoLusdBal: {}
     }
   },
@@ -83,6 +85,7 @@ export default {
       dxd: 'markets/dxd',
       eth: 'markets/eth',
       eth2: 'markets/eth2',
+      swpr: 'markets/swpr',
       userSelectedCurrency: 'markets/userSelectedCurrency',
       wsPriceFeed: 'system/webSocketPriceFeed',
       fallbackPriceFeed: 'system/fallbackPriceFeed'
@@ -160,6 +163,21 @@ export default {
       // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
       balance.then(data => this.dxdaoLusdBal = data)
       return this.dxdaoLusdBal.result
+    },
+    dxdaoSwprBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0x6cAcDB97e3fC8136805a9E7c342d866ab77D0957'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoSwprBal = data)
+      return this.dxdaoSwprBal.result
     },
     allTimeHigh () {
       return this.dxd

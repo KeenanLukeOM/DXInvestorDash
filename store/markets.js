@@ -25,7 +25,7 @@ const getters = {
       state.prices.eth &&
       state.prices.dxd &&
       state.prices.eth2 &&
-      state.prices.Lusd
+      state.prices.swpr
     ) {
       return state.prices;
     }
@@ -62,6 +62,20 @@ const getters = {
     }
     if (getters.coinGecko) {
       return getters.coinGecko.find(item => item.id === "seth2");
+    }
+    return false;
+  },
+  swpr(state, getters) {
+    if (["usd", "eur", "gbp"].includes(getters.userSelectedCurrency.id)) {
+      if (getters.prices && getters.coinGecko) {
+        const swpr = getters.coinGecko.find(item => item.id === "swapr");
+        return Object.assign({}, swpr, {
+          current_price: getters.prices.swpr
+        });
+      }
+    }
+    if (getters.coinGecko) {
+      return getters.coinGecko.find(item => item.id === "swapr");
     }
     return false;
   },
@@ -197,7 +211,7 @@ const actions = {
   async fetchCoinGecko({ state, commit }, cookies) {
     const coinGecko = new CoinGecko();
     const markets = await coinGecko.coins.markets({
-      ids: ["dxdao", "ethereum", "seth2"],
+      ids: ["dxdao", "ethereum", "seth2", "swapr"],
       vs_currency: state.userSelectedCurrency.id
     });
     commit("setCoinGeckoData", markets.data);
