@@ -21,7 +21,12 @@ const getters = {
     return state.coinGecko;
   },
   prices(state) {
-    if (state.prices.eth && state.prices.dxd && state.prices.eth2) {
+    if (
+      state.prices.eth &&
+      state.prices.dxd &&
+      state.prices.eth2 &&
+      state.prices.Lusd
+    ) {
       return state.prices;
     }
     return false;
