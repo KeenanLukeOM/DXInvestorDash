@@ -25,6 +25,7 @@
     "etherscan-api": "^10.2.0",
     "install": "^0.13.0",
     "intersection-observer": "^0.12.0",
+    "lodash": "^4.17.21",
     "npm": "^6.14.10",
     "nuxt": "^2.14.6",
     "observer-registry": "^1.0.0",

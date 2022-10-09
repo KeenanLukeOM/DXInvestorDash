@@ -16,16 +16,18 @@
             <strong>DXdao Treasury Value</strong>
           </td>
           <td class="w-1/2">
-            <!-- {{ formatPrice(((dxdaoEthBalance / 1000000000000000000) * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            <!-- {{ formatPrice(((dxdaoUsdcBalance / 1000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            <!-- {{ formatPrice(((dxdaoEth2Balance / 1000000000000000000) * eth2.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            <!-- {{ formatPrice(((dxdaoSwprBalance / 1000000000000000000) * swpr.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            <!-- {{ formatPrice(((dxdaoLusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            {{ formatPrice((dxdaoEthBalance() * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id) }}
+            <!-- {{ formatPrice(((((dxdaoEthBalance / 1000000000000000000) + 231 + 2499 + 62 + 993 ) * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id )) }} -->
+            <!-- + (((dxdaoDaiBalance / 1000000000000000000) + 395950 + 435110 + 1742699 + 207228)) + (((dxdaoUsdcBalance / 1000000) + 138533 + 441818 + 231992)) + (((dxdaoEth2Balance / 1000000000000000000) * eth2.current_price)) + (((dxdaoSwprBalance / 1000000000000000000) / 4 ) * swpr.current_price) + (((dxdaoEnsBalance / 1000000000000000000) / 4 ) * ens.current_price)) -->
+
+            <!-- {{ ((dxdaoLusdBalance / 1000000000000000000)) }} -->
             <!-- {{ formatPrice((((dxdaoEnsBalance / 1000000000000000000) / 4 ) * ens.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoStethBalance / 1000000000000000000) * steth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoSusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            {{ formatPrice(((dxdaoRethBalance / 1000000000000000000) * reth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            <!-- {{ formatPrice(((dxdaoRethBalance / 1000000000000000000) * reth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice((5 * wbtc.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice((848 * dpi.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice(((255 * gno.current_price) / 4 ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
           </td>
         </tr>
         <tr>
@@ -69,6 +71,7 @@
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { mapGetters } from 'vuex'
+import _ from 'lodash'
 import { formatPrice } from '~/libs/utils'
 
 dayjs.extend(relativeTime)
@@ -97,24 +100,29 @@ export default {
       ens: 'markets/ens',
       steth: 'markets/steth',
       reth: 'markets/reth',
+      wbtc: 'markets/wbtc',
+      dpi: 'markets/dpi',
+      gno: 'markets/gno',
       userSelectedCurrency: 'markets/userSelectedCurrency',
       wsPriceFeed: 'system/webSocketPriceFeed',
       fallbackPriceFeed: 'system/fallbackPriceFeed'
     }),
     // eslint-disable-next-line vue/return-in-computed-property
-    dxdaoEthBalance () {
-      const api = require('etherscan-api').init(
-        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
-      )
-      const balance = api.account.balance(
-        '0x519b70055af55a007110b4ff99b0ea33071c720a'
-      )
-      // eslint-disable-next-line vue/no-async-in-computed-properties
-      balance.then(balanceData => balanceData.json)
-      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
-      balance.then(data => this.dxdaoEthBal = data)
-      return this.dxdaoEthBal.result
-    },
+    // dxdaoEthBalance () {
+    //   const api = require('etherscan-api').init(
+    //     'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+    //   )
+    //   const balance = api.account.balance(
+    //     '0x519b70055af55a007110b4ff99b0ea33071c720a'
+    //   )
+    //   // eslint-disable-next-line vue/no-async-in-computed-properties
+    //   balance.then(balanceData => balanceData.json)
+    //   // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+    //   balance.then(data => this.dxdaoEthBal = data)
+    //   // eslint-disable-next-line no-console
+    //   console.log(this.dxdaoEthBal.result)
+    //   return this.dxdaoEthBal.result
+    // },
     dxdaoDaiBalance () {
       const api = require('etherscan-api').init(
         'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
@@ -293,7 +301,23 @@ export default {
     formatPrice,
     isPossitive (number) {
       return number >= 0 ? 'yes' : 'no'
-    }
+    },
+    dxdaoEthBalance: _.debounce(
+      function () {
+        const api = require('etherscan-api').init(
+          'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+        )
+        const balance = api.account.balance(
+          '0x519b70055af55a007110b4ff99b0ea33071c720a'
+        )
+        // eslint-disable-next-line vue/no-async-in-computed-properties
+        balance.then(balanceData => balanceData.json)
+        // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+        balance.then(data => this.dxdaoEthBal = data)
+        // eslint-disable-next-line no-console
+        console.log(this.eth.current_price, this.dxdaoEthBal.result)
+        return ((this.dxdaoEthBal.result / 1000000000000000000) + 231 + 2499 + 62 + 993)
+      }, 2000)
   }
 }
 </script>

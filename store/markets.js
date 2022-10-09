@@ -28,7 +28,10 @@ const getters = {
       state.prices.swpr &&
       state.prices.ens &&
       state.prices.steth &&
-      state.prices.reth
+      state.prices.reth &&
+      state.prices.wbtc &&
+      state.prices.dpi &&
+      state.prices.gno
     ) {
       return state.prices;
     }
@@ -129,6 +132,52 @@ const getters = {
     }
     if (getters.coinGecko) {
       return getters.coinGecko.find(item => item.id === "rocket-pool-eth");
+    }
+    return false;
+  },
+  wbtc(state, getters) {
+    if (["usd", "eur", "gbp"].includes(getters.userSelectedCurrency.id)) {
+      if (getters.prices && getters.coinGecko) {
+        const wbtc = getters.coinGecko.find(
+          item => item.id === "wrapped-bitcoin"
+        );
+        return Object.assign({}, wbtc, {
+          current_price: getters.prices.wbtc
+        });
+      }
+    }
+    if (getters.coinGecko) {
+      return getters.coinGecko.find(item => item.id === "wrapped-bitcoin");
+    }
+    return false;
+  },
+  dpi(state, getters) {
+    if (["usd", "eur", "gbp"].includes(getters.userSelectedCurrency.id)) {
+      if (getters.prices && getters.coinGecko) {
+        const dpi = getters.coinGecko.find(
+          item => item.id === "defipulse-index"
+        );
+        return Object.assign({}, dpi, {
+          current_price: getters.prices.dpi
+        });
+      }
+    }
+    if (getters.coinGecko) {
+      return getters.coinGecko.find(item => item.id === "defipulse-index");
+    }
+    return false;
+  },
+  gno(state, getters) {
+    if (["usd", "eur", "gbp"].includes(getters.userSelectedCurrency.id)) {
+      if (getters.prices && getters.coinGecko) {
+        const gno = getters.coinGecko.find(item => item.id === "gnosis");
+        return Object.assign({}, gno, {
+          current_price: getters.prices.dpi
+        });
+      }
+    }
+    if (getters.coinGecko) {
+      return getters.coinGecko.find(item => item.id === "gnosis");
     }
     return false;
   },
@@ -271,7 +320,10 @@ const actions = {
         "swapr",
         "ethereum-name-service",
         "staked-ether",
-        "rocket-pool-eth"
+        "rocket-pool-eth",
+        "wrapped-bitcoin",
+        "defipulse-index",
+        "gnosis"
       ],
       vs_currency: state.userSelectedCurrency.id
     });
