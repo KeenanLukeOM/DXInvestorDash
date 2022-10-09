@@ -3,31 +3,53 @@
     <table class="table-fixed">
       <thead>
         <tr>
-          <td colspan="2" class="text-center leading-md">DXdao Statistics
+          <td colspan="2" class="text-center leading-md">
+            DXdao Statistics
 
-<small>(Last Update: {{ lastUpdated }})</small></td>
+            <small>(Last Update: {{ lastUpdated }})</small>
+          </td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="w-1/2 text-right"><strong>DXdao Treasury Value</strong></td>
-          <td class="w-1/2">{{ nodeCost }}</td>
+          <td class="w-1/2 text-right">
+            <strong>DXdao Treasury Value</strong>
+          </td>
+          <td class="w-1/2">
+            {{ dxdaoEthBalance / 1000000000000000000 }}
+          </td>
         </tr>
         <tr>
-          <td class="w-1/2 text-right"><strong>DXD Circulating Supply</strong></td>
-          <td class="w-1/2">{{ dxdCirculatingSupply }}</td>
+          <td class="w-1/2 text-right">
+            <strong>DXD Circulating Supply</strong>
+          </td>
+          <td class="w-1/2">
+            {{ dxdCirculatingSupply }}
+          </td>
         </tr>
         <tr>
-          <td class="w-1/2 text-right"><strong>All Time High (ATH)</strong></td>
-          <td class="w-1/2">{{ allTimeHigh }}</td>
+          <td class="w-1/2 text-right">
+            <strong>All Time High (ATH)</strong>
+          </td>
+          <td class="w-1/2">
+            {{ allTimeHigh }}
+          </td>
         </tr>
         <tr>
-          <td class="w-1/2 text-right"><strong>Percentage from ATH</strong></td>
-          <td class="w-1/2">{{ percentageFromAllTimeHigh }}</td>
+          <td class="w-1/2 text-right">
+            <strong>Percentage from ATH</strong>
+          </td>
+          <td class="w-1/2">
+            {{ percentageFromAllTimeHigh }}
+          </td>
         </tr>
         <tr>
-          <td class="w-1/2 text-right"><strong>Days since ATH</strong></td>
-          <td class="w-1/2">{{ daysSinceAllTimeHigh }}</td>
+          <td class="w-1/2 text-right">
+            <strong>Days since ATH</strong>
+          </td>
+          <td class="w-1/2">
+            {{ daysSinceAllTimeHigh }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -43,24 +65,48 @@ import { formatPrice } from '~/libs/utils'
 dayjs.extend(relativeTime)
 
 export default {
+  data () {
+    return {
+      dxdaoEthBal: {}
+    }
+  },
+  method: {},
   computed: {
     ...mapGetters({
       dxd: 'markets/dxd',
       userSelectedCurrency: 'markets/userSelectedCurrency'
     }),
-    nodeCost () {
-      return this.dxd ? formatPrice(this.dxd.current_price * 32, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
+    // eslint-disable-next-line vue/return-in-computed-property
+    dxdaoEthBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.balance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoEthBal = data)
+      return this.dxdaoEthBal.result
     },
     allTimeHigh () {
-      return this.dxd ? formatPrice(this.dxd.ath, this.userSelectedCurrency.format, this.userSelectedCurrency.id) : false
+      return this.dxd
+        ? formatPrice(
+          this.dxd.ath,
+          this.userSelectedCurrency.format,
+          this.userSelectedCurrency.id
+        )
+        : false
     },
     daysSinceAllTimeHigh () {
       if (this.dxd) {
         const athDate = dayjs(this.dxd.ath_date)
-        return dayjs().diff(athDate, 'day').toLocaleString(
-          this.userSelectedCurrency.format,
-          { maximumFractionDigits: 0 }
-        )
+        return dayjs()
+          .diff(athDate, 'day')
+          .toLocaleString(this.userSelectedCurrency.format, {
+            maximumFractionDigits: 0
+          })
       }
       return false
     },
