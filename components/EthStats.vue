@@ -18,7 +18,7 @@
           <td class="w-1/2">
             <!-- {{ formatPrice(((dxdaoEthBalance / 1000000000000000000) * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            {{ formatPrice(((dxdaoUsdcBalance / 1000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }}
           </td>
         </tr>
         <tr>
@@ -70,7 +70,8 @@ export default {
   data () {
     return {
       dxdaoEthBal: {},
-      dxdaoDaiBal: {}
+      dxdaoDaiBal: {},
+      dxdaoUsdcBal: {}
     }
   },
   computed: {
@@ -109,6 +110,21 @@ export default {
       // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
       balance.then(data => this.dxdaoDaiBal = data)
       return this.dxdaoDaiBal.result
+    },
+    dxdaoUsdcBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoUsdcBal = data)
+      return this.dxdaoUsdcBal.result
     },
     allTimeHigh () {
       return this.dxd
