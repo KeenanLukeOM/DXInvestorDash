@@ -20,8 +20,12 @@
             <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoUsdcBalance / 1000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoEth2Balance / 1000000000000000000) * eth2.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
-            {{ formatPrice(((dxdaoSwprBalance / 1000000000000000000) * swpr.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }}
+            <!-- {{ formatPrice(((dxdaoSwprBalance / 1000000000000000000) * swpr.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
             <!-- {{ formatPrice(((dxdaoLusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice((((dxdaoEnsBalance / 1000000000000000000) / 4 ) * ens.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice(((dxdaoStethBalance / 1000000000000000000) * steth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice(((dxdaoSusdBalance / 1000000000000000000)), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            {{ formatPrice(((dxdaoRethBalance / 1000000000000000000) * reth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }}
           </td>
         </tr>
         <tr>
@@ -77,7 +81,11 @@ export default {
       dxdaoUsdcBal: {},
       dxdaoEth2Bal: {},
       dxdaoSwprBal: {},
-      dxdaoLusdBal: {}
+      dxdaoLusdBal: {},
+      dxdaoEnsBal: {},
+      dxdaoStethBal: {},
+      dxdaoSusdBal: {},
+      dxdaoRethBal: {}
     }
   },
   computed: {
@@ -86,6 +94,9 @@ export default {
       eth: 'markets/eth',
       eth2: 'markets/eth2',
       swpr: 'markets/swpr',
+      ens: 'markets/ens',
+      steth: 'markets/steth',
+      reth: 'markets/reth',
       userSelectedCurrency: 'markets/userSelectedCurrency',
       wsPriceFeed: 'system/webSocketPriceFeed',
       fallbackPriceFeed: 'system/fallbackPriceFeed'
@@ -178,6 +189,66 @@ export default {
       // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
       balance.then(data => this.dxdaoSwprBal = data)
       return this.dxdaoSwprBal.result
+    },
+    dxdaoEnsBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoEnsBal = data)
+      return this.dxdaoEnsBal.result
+    },
+    dxdaoStethBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoStethBal = data)
+      return this.dxdaoStethBal.result
+    },
+    dxdaoSusdBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoSusdBal = data)
+      return this.dxdaoSusdBal.result
+    },
+    dxdaoRethBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0xae78736Cd615f374D3085123A210448E74Fc6393'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoRethBal = data)
+      return this.dxdaoRethBal.result
     },
     allTimeHigh () {
       return this.dxd
