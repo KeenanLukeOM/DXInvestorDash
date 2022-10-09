@@ -16,7 +16,9 @@
             <strong>DXdao Treasury Value</strong>
           </td>
           <td class="w-1/2">
-            {{ dxdaoEthBalance / 1000000000000000000 }}
+            <!-- {{ formatPrice(((dxdaoEthBalance / 1000000000000000000) * eth.current_price), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            <!-- {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }} -->
+            {{ formatPrice(((dxdaoDaiBalance / 1000000000000000000) ), userSelectedCurrency.format, userSelectedCurrency.id ) }}
           </td>
         </tr>
         <tr>
@@ -67,14 +69,17 @@ dayjs.extend(relativeTime)
 export default {
   data () {
     return {
-      dxdaoEthBal: {}
+      dxdaoEthBal: {},
+      dxdaoDaiBal: {}
     }
   },
-  method: {},
   computed: {
     ...mapGetters({
       dxd: 'markets/dxd',
-      userSelectedCurrency: 'markets/userSelectedCurrency'
+      eth: 'markets/eth',
+      userSelectedCurrency: 'markets/userSelectedCurrency',
+      wsPriceFeed: 'system/webSocketPriceFeed',
+      fallbackPriceFeed: 'system/fallbackPriceFeed'
     }),
     // eslint-disable-next-line vue/return-in-computed-property
     dxdaoEthBalance () {
@@ -89,6 +94,21 @@ export default {
       // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
       balance.then(data => this.dxdaoEthBal = data)
       return this.dxdaoEthBal.result
+    },
+    dxdaoDaiBalance () {
+      const api = require('etherscan-api').init(
+        'FI9MR2BMJUNDXWVX76DT2GN3C28KRPMRFC'
+      )
+      const balance = api.account.tokenbalance(
+        '0x519b70055af55a007110b4ff99b0ea33071c720a',
+        '',
+        '0x6B175474E89094C44Da98b954EedeAC495271d0F'
+      )
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      balance.then(balanceData => balanceData.json)
+      // eslint-disable-next-line no-return-assign, vue/no-async-in-computed-properties
+      balance.then(data => this.dxdaoDaiBal = data)
+      return this.dxdaoDaiBal.result
     },
     allTimeHigh () {
       return this.dxd
@@ -127,6 +147,12 @@ export default {
         return dayjs(this.dxd.last_updated).fromNow()
       }
       return false
+    }
+  },
+  methods: {
+    formatPrice,
+    isPossitive (number) {
+      return number >= 0 ? 'yes' : 'no'
     }
   }
 }
